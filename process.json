@@ -11,6 +11,7 @@
     {
       "name": "ngrok",
       "script": "ngrok",
+      "watch": "true",
       "args": "http --url=mongrel-evident-usefully.ngrok-free.app 3005",
       "env": {
         "NGROK_AUTHTOKEN": "2jkzf9XUTou5qAvFJQOohJkcitm_5qiYMvdGYuua1iKSkL37"
