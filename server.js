@@ -14,12 +14,11 @@ mongoose
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-app.post("/shorten", async (req, res) => {
-  const { originalUrl } = req.body;
-  if (!originalUrl)
-    return res.status(400).json({ error: "originalUrl is required" });
+app.post("/", async (req, res) => {
+  const { url } = req.body;
+  if (!url) return res.status(400).json({ error: "originalUrl is required" });
 
-  const newUrl = new Url({ originalUrl });
+  const newUrl = new Url({ url });
   await newUrl.save();
 
   res.json({ shortUrl: `${process.env.BASE_URL}/${newUrl._id}` });
@@ -33,6 +32,9 @@ app.get("/:id", async (req, res) => {
   } catch (e) {
     res.status(400).json({ error: "Invalid ID format" });
   }
+});
+app.get("/", async (req, res) => {
+  res.json({ error: "HTTP Method POST only" });
 });
 
 const PORT = process.env.PORT || 3005;
