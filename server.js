@@ -27,14 +27,15 @@ app.post("/", async (req, res) => {
 app.get("/:id", async (req, res) => {
   try {
     const entry = await Url.findById(req.params.id);
-    if (entry) res.redirect(entry.originalUrl);
+    console.log(entry);
+    if (entry) res.redirect(entry.url);
     else res.status(404).json({ error: "Short URL not found" });
   } catch (e) {
     res.status(400).json({ error: "Invalid ID format" });
   }
 });
 app.get("/", async (req, res) => {
-  res.json({ error: "HTTP Method POST only" });
+  res.json({ message: "HTTP Method POST only" });
 });
 
 const PORT = process.env.PORT || 3005;
